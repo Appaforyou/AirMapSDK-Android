@@ -229,6 +229,11 @@ public class MapDataController {
 
     protected Func1<AirMapPolygon, Observable<List<AirMapJurisdiction>>> getJurisdictions() {
         return polygon -> Observable.create((Observable.OnSubscribe<List<AirMapJurisdiction>>) subscriber -> {
+            if (!map.isShown()) {
+                subscriber.onError(new Throwable("Features are empty"));
+                return;
+            };
+
             // query map for jurisdictions
             List<Feature> features = map.getMap().queryRenderedFeatures(new RectF(0,
                     0, map.getMeasuredWidth(), map.getMeasuredHeight()), "jurisdictions");
