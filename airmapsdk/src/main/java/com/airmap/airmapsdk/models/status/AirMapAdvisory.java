@@ -33,6 +33,7 @@ import static com.airmap.airmapsdk.util.Utils.optString;
 
 public class AirMapAdvisory implements Serializable, AirMapBaseModel {
     private String id;
+    private String rulesetId;
     private String name;
     private String organizationId;
     private MappingService.AirMapAirspaceType type;
@@ -83,6 +84,7 @@ public class AirMapAdvisory implements Serializable, AirMapBaseModel {
     public AirMapAdvisory constructFromJson(JSONObject json) {
         if (json != null) {
             setId(optString(json, "id"));
+            setRulesetId(optString(json, "ruleset_id"));
             setName(optString(json, "name"));
             setOrganizationId(optString(json, "organization_id"));
             setType(MappingService.AirMapAirspaceType.fromString(optString(json, "type")));
@@ -195,6 +197,13 @@ public class AirMapAdvisory implements Serializable, AirMapBaseModel {
 
     public AirMapAdvisory setId(String id) {
         this.id = id;
+        return this;
+    }
+
+    public String getRulesetId() { return rulesetId; }
+
+    public AirMapAdvisory setRulesetId(String rulesetId) {
+        this.rulesetId = rulesetId;
         return this;
     }
 
